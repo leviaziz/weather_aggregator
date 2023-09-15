@@ -15,9 +15,10 @@ defmodule WeatherAggregator.Application do
       # Start Finch
       {Finch, name: WeatherAggregator.Finch},
       # Start the Endpoint (http/https)
-      WeatherAggregatorWeb.Endpoint
+      WeatherAggregatorWeb.Endpoint,
       # Start a worker by calling: WeatherAggregator.Worker.start_link(arg)
       # {WeatherAggregator.Worker, arg}
+      WeatherAggregator.Aggregator
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
