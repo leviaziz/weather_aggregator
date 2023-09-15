@@ -18,7 +18,7 @@ defmodule WeatherAggregator.Application do
       WeatherAggregatorWeb.Endpoint,
       # Start a worker by calling: WeatherAggregator.Worker.start_link(arg)
       # {WeatherAggregator.Worker, arg}
-      WeatherAggregator.Aggregator
+      WeatherAggregator.GenServer
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
