@@ -4,14 +4,14 @@ defmodule WeatherAggregator.Aggregator do
 
   def run(%{}) do
     %{
-      summary: Summary.fetch_location_data(%{}),
+      summary: Summary.fetch_summary_data(%{}),
       detail: Detail.get_each_source_separately(%{})
     }
   end
 
   def run(state) do
     %{
-      summary: Summary.fetch_location_data(state),
+      summary: Summary.fetch_summary_data(state),
       detail: Detail.get_each_source_separately(state)
     }
   end

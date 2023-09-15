@@ -3,7 +3,8 @@ defmodule WeatherAggregator.Aggregator.Summary do
   alias WeatherAggregator.WeatherApi.TomorrowIo
   alias WeatherAggregator.WeatherApi.VisualCrossing
 
-  def fetch_location_data(%{}) do
+  @spec fetch_summary_data(map) :: map
+  def fetch_summary_data(%{}) do
     locations = ["newyork", "london"]
 
     res =
@@ -19,7 +20,7 @@ defmodule WeatherAggregator.Aggregator.Summary do
     |> Map.merge(map1)
   end
 
-  def fetch_location_data(%{summary: summary}) do
+  def fetch_summary_data(%{summary: summary}) do
     locations = Map.to_list(summary)
 
     res =

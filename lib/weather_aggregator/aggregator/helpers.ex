@@ -1,4 +1,5 @@
 defmodule WeatherAggregator.Aggregator.Helpers do
+  @spec aggregate(list, list) :: any
   def aggregate([], []), do: []
   def aggregate([], src_b), do: src_b
   def aggregate(src_a, []), do: src_a

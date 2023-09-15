@@ -3,6 +3,7 @@ defmodule WeatherAggregator.Aggregator.Detail do
   alias WeatherAggregator.WeatherApi.TomorrowIo
   alias WeatherAggregator.WeatherApi.VisualCrossing
 
+  @spec get_each_source_separately(map) :: list
   def get_each_source_separately(%{}) do
     locations = ["newyork", "london"]
 
