@@ -20,11 +20,11 @@ defmodule WeatherAggregator.WeatherApi.VisualCrossing do
 
   @spec get_location_data(binary()) :: list(forecast())
   def get_location_data(location) do
-    data =
-      "#{@base_url}/#{location}?unitGroup=us&include=days&key=#{@api_key}&contentType=json"
-      |> Request.get_request()
-
-    get_three_days_data(data["days"])
+    case "#{@base_url}/#{location}?unitGroup=us&include=days&key=#{@api_key}&contentType=json"
+         |> Request.get_request() do
+      {:error, _} -> []
+      data -> get_three_days_data(data["days"])
+    end
   end
 
   defp get_three_days_data(days) do

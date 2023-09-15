@@ -20,11 +20,11 @@ defmodule WeatherAggregator.WeatherApi.TomorrowIo do
 
   @spec get_location_data(binary()) :: list(forecast())
   def get_location_data(location) do
-    data =
-      "#{@base_url}?location=#{location}&apikey=#{@api_key}&timesteps=1d&units=imperial"
-      |> Request.get_request()
-
-    get_three_days_data(data["timelines"]["daily"])
+    case "#{@base_url}?location=#{location}&apikey=#{@api_key}&timesteps=1d&units=imperial"
+         |> Request.get_request() do
+      {:error, _} -> []
+      data -> get_three_days_data(data["timelines"]["daily"])
+    end
   end
 
   defp get_three_days_data(days) do
