@@ -18,3 +18,7 @@ config :logger, level: :warning
 
 # Initialize plugs at runtime for faster test compilation
 config :phoenix, :plug_init_mode, :runtime
+
+# Add weather APIs modules
+config :weather_aggregator, :tomorrow_io, WeatherAggregator.WeatherApi.TomorrowIoTest
+config :weather_aggregator, :visual_crossing, WeatherAggregator.WeatherApi.VisualCrossingTest

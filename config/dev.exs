@@ -67,3 +67,7 @@ config :phoenix, :plug_init_mode, :runtime
 
 # Disable swoosh api client as it is only required for production adapters.
 config :swoosh, :api_client, false
+
+# Add weather APIs modules
+config :weather_aggregator, :tomorrow_io, WeatherAggregator.WeatherApi.TomorrowIo
+config :weather_aggregator, :visual_crossing, WeatherAggregator.WeatherApi.VisualCrossing
