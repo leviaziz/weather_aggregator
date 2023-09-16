@@ -2,7 +2,7 @@ defmodule WeatherAggregator.GenServer do
   use GenServer
 
   def start_link(_opts) do
-    GenServer.start_link(__MODULE__, %{})
+    GenServer.start_link(__MODULE__, %{}, name: __MODULE__)
   end
 
   def init(state) do
@@ -19,6 +19,14 @@ defmodule WeatherAggregator.GenServer do
     # Reschedule the work
     schedule_work()
     {:noreply, state}
+  end
+
+  def get_state do
+    GenServer.call(__MODULE__, :get_state)
+  end
+
+  def handle_call(:get_state, _from, state) do
+    {:reply, state, state}
   end
 
   defp schedule_work do

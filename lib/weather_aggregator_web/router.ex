@@ -16,14 +16,16 @@ defmodule WeatherAggregatorWeb.Router do
 
   scope "/", WeatherAggregatorWeb do
     pipe_through :browser
-
     get "/", PageController, :home
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", WeatherAggregatorWeb do
-  #   pipe_through :api
-  # end
+  scope "/api/weather", WeatherAggregatorWeb do
+    pipe_through :api
+    get "/detail", WeatherController, :get_detail
+    get "/summary", WeatherController, :get_summary
+    post "/update", WeatherController, :update_summary
+  end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:weather_aggregator, :dev_routes) do
