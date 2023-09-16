@@ -1,7 +1,5 @@
 defmodule WeatherAggregator.Aggregator.Summary do
   import WeatherAggregator.Aggregator.Helpers
-  alias WeatherAggregator.WeatherApi.TomorrowIo
-  alias WeatherAggregator.WeatherApi.VisualCrossing
 
   @spec fetch_summary_data(map) :: map
   def fetch_summary_data(%{}) do
@@ -9,8 +7,8 @@ defmodule WeatherAggregator.Aggregator.Summary do
 
     res =
       Enum.map(locations, fn location ->
-        one = TomorrowIo.get_location_data(location)
-        two = VisualCrossing.get_location_data(location)
+        one = tomorrow_io_module().get_location_data(location)
+        two = visual_crossing_module().get_location_data(location)
         %{"#{location}": aggregate(one, two)}
       end)
 
@@ -25,8 +23,8 @@ defmodule WeatherAggregator.Aggregator.Summary do
 
     res =
       Enum.map(locations, fn {location, list} ->
-        one = TomorrowIo.get_location_data("#{location}")
-        two = VisualCrossing.get_location_data("#{location}")
+        one = tomorrow_io_module().get_location_data("#{location}")
+        two = visual_crossing_module().get_location_data("#{location}")
 
         from_sources = aggregate(one, two)
         %{"#{location}": aggregate(from_sources, list)}
@@ -36,5 +34,13 @@ defmodule WeatherAggregator.Aggregator.Summary do
 
     hd(res)
     |> Map.merge(map1)
+  end
+
+  defp tomorrow_io_module do
+    Application.get_env(:weather_aggregator, :tomorrow_io)
+  end
+
+  defp visual_crossing_module do
+    Application.get_env(:weather_aggregator, :visual_crossing)
   end
 end
