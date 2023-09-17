@@ -5,35 +5,38 @@ defmodule WeatherAggregatorWeb.WeatherController do
 
   def get_detail(conn, _params) do
     case DataParser.get_detail_data() do
-    data ->
-      conn
-      |> put_resp_content_type("application/json")
-      |> send_resp(200, Jason.encode!(data))
-    {:error, reason} ->
+      data ->
+        conn
+        |> put_resp_content_type("application/json")
+        |> send_resp(200, Jason.encode!(data))
+
+      {:error, reason} ->
         conn
         |> put_status(:bad_request)
         |> send_resp(500, Poison.encode!(reason))
     end
-
   end
 
   def get_summary(conn, _params) do
     case DataParser.get_summary_data() do
-    {:ok, data} ->
-      conn
-      |> put_resp_content_type("application/json")
-      |> send_resp(200, Poison.encode!(data))
-    {:error, reason} ->
+      {:ok, data} ->
+        conn
+        |> put_resp_content_type("application/json")
+        |> send_resp(200, Poison.encode!(data))
+
+      {:error, reason} ->
         conn
         |> put_status(:bad_request)
         |> send_resp(500, Poison.encode!(reason))
     end
-
   end
 
   def update_summary(conn, _params) do
+    summary = DataParser.get_summary_data()
+
     try do
-      state = WeatherAggregator.Aggregator.run(%{})    
+      state = WeatherAggregator.Aggregator.run(summary)
+
       conn
       |> put_resp_content_type("application/json")
       |> send_resp(200, "State update successfully!")
@@ -44,5 +47,4 @@ defmodule WeatherAggregatorWeb.WeatherController do
         |> send_resp(500, Poison.encode!(reason))
     end
   end
-
 end
