@@ -1,14 +1,15 @@
 defmodule WeatherAggregatorWeb.Helper.WeatherDataMapper do
   def from_json(json) do
-      map_data(json)
+    map_data(json)
   end
 
   defp map_data(data) do
     IO.inspect(data)
+
     %WeatherAggregatorWeb.Helper.WeatherData{
       detail: [
-      newyork: map_location(data, "newyork"),
-      london: map_location(data, "london")
+        newyork: map_location(data, "newyork"),
+        london: map_location(data, "london")
       ]
     }
   end

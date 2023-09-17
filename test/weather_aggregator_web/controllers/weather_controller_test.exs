@@ -14,7 +14,7 @@ defmodule WeatherAggregatorWeb.WeatherControllerTest do
     test "returns a 500 error response on failure", %{conn: conn} do
       {:error, reason} = {:error, "Some error message"}
 
-      allow(DataParser).to receive(:get_detail_data) |> fn _ -> {:error, reason} end
+      allow(DataParser).to(receive(:get_detail_data) |> fn _ -> {:error, reason} end)
 
       conn = get(conn, Routes.weather_path(conn, :get_detail))
 
@@ -36,7 +36,7 @@ defmodule WeatherAggregatorWeb.WeatherControllerTest do
     test "returns a 500 error response on failure", %{conn: conn} do
       {:error, reason} = {:error, "Some error message"}
 
-      allow(DataParser).to receive(:get_summary_data) |> fn _ -> {:error, reason} end
+      allow(DataParser).to(receive(:get_summary_data) |> fn _ -> {:error, reason} end)
 
       conn = get(conn, Routes.weather_path(conn, :get_summary))
 
@@ -47,7 +47,7 @@ defmodule WeatherAggregatorWeb.WeatherControllerTest do
 
   describe "update_summary/2" do
     test "returns success message when successful", %{conn: conn} do
-      allow(WeatherAggregator.Aggregator).to receive(:run) |> fn _ -> {:ok, %{}} end
+      allow(WeatherAggregator.Aggregator).to(receive(:run) |> fn _ -> {:ok, %{}} end)
 
       conn = post(conn, Routes.weather_path(conn, :update_summary))
 
@@ -56,7 +56,10 @@ defmodule WeatherAggregatorWeb.WeatherControllerTest do
     end
 
     test "returns a 500 error response on failure", %{conn: conn} do
-      allow(WeatherAggregator.Aggregator).to receive(:run) |> fn _ -> {:error, "Some error message"} end
+      allow(WeatherAggregator.Aggregator).to(
+        receive(:run)
+        |> fn _ -> {:error, "Some error message"} end
+      )
 
       conn = post(conn, Routes.weather_path(conn, :update_summary))
 

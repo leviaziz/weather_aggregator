@@ -12,6 +12,7 @@ defmodule WeatherAggregatorWeb.Helper.DataParser do
     case get_data() do
       {:ok, weather_data} ->
         {:ok, weather_data[:detail]}
+
       error ->
         error
     end
@@ -21,6 +22,7 @@ defmodule WeatherAggregatorWeb.Helper.DataParser do
     case get_data() do
       {:ok, weather_data} ->
         {:ok, weather_data[:summary]}
+
       error ->
         error
     end
