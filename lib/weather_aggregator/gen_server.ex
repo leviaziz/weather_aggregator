@@ -30,10 +30,12 @@ defmodule WeatherAggregator.GenServer do
   end
 
   def update_state(new_state) do
+    IO.inspect("UPDATINNG STATE...")
     GenServer.cast(__MODULE__, {:update_state, new_state})
   end
 
   def handle_cast({:update_state, new_state}, current_state) do
+    IO.inspect("UPDATED!")
     {:noreply, new_state}
   end
 
