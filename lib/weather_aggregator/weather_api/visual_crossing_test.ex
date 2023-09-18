@@ -1,5 +1,9 @@
 defmodule WeatherAggregator.WeatherApi.VisualCrossingTest do
-  def get_location_data(location) do
+  @moduledoc """
+  This module serves as the mock module for VisualCrossing API testing.
+  """
+
+  def get_location_data(_location) do
     [
       %{
         date: ~D[2023-09-16],
