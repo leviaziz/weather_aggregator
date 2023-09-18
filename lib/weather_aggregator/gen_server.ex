@@ -29,6 +29,14 @@ defmodule WeatherAggregator.GenServer do
     {:reply, state, state}
   end
 
+  def update_state(new_state) do
+    GenServer.cast(__MODULE__, {:update_state, new_state})
+  end
+
+  def handle_cast({:update_state, new_state}, current_state) do
+    {:noreply, new_state}
+  end
+
   defp schedule_work do
     Process.send_after(self(), :work, 6 * 60 * 60 * 1000)
   end
