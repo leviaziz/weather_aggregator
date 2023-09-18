@@ -39,6 +39,8 @@ defmodule WeatherAggregator.WeatherApi.VisualCrossing do
       if date in days_required do
         %{
           date: date,
+          # This third party API doesn't come with min and max values for humidity.
+          # So, using average value for min and max.
           humidity: %{
             min: day["humidity"],
             max: day["humidity"],
