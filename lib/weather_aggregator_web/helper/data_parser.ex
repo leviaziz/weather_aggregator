@@ -1,6 +1,5 @@
 defmodule WeatherAggregatorWeb.Helper.DataParser do
-  alias WeatherAggregatorWeb.Helper.WeatherDataMapper
-
+  @spec get_data :: {:ok, any}
   def get_data() do
     case WeatherAggregator.GenServer.get_state() do
       nil -> {:ok, %{}}
@@ -8,6 +7,7 @@ defmodule WeatherAggregatorWeb.Helper.DataParser do
     end
   end
 
+  @spec get_detail_data :: {:ok, list}
   def get_detail_data() do
     case get_data() do
       {:ok, weather_data} ->
@@ -18,6 +18,7 @@ defmodule WeatherAggregatorWeb.Helper.DataParser do
     end
   end
 
+  @spec get_summary_data :: {:ok, map}
   def get_summary_data() do
     case get_data() do
       {:ok, weather_data} ->

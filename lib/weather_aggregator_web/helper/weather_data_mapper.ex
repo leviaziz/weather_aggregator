@@ -1,4 +1,8 @@
 defmodule WeatherAggregatorWeb.Helper.WeatherDataMapper do
+  @spec from_json(map) :: %WeatherAggregatorWeb.Helper.WeatherData{
+          detail: [{:london, map} | {:newyork, map}, ...],
+          summary: %{london: [map, ...], newyork: [map, ...]}
+        }
   def from_json(json) do
     map_data(json)
   end

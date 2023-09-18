@@ -2,6 +2,7 @@ defmodule WeatherAggregator.Aggregator do
   alias WeatherAggregator.Aggregator.Summary
   alias WeatherAggregator.Aggregator.Detail
 
+  @spec run(map) :: %{summary: map(), detail: list()}
   def run(%{}) do
     %{
       summary: Summary.fetch_summary_data(%{}),

@@ -9,6 +9,7 @@ defmodule WeatherAggregator.Request do
     {"Content-type", "application/json"}
   ]
 
+  @spec get_request(binary, list) :: {:ok, any} | {:error, any}
   def get_request(url, header \\ []) do
     url
     |> HTTPoison.get(header ++ @headers)
