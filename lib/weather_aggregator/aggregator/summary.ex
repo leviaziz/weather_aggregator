@@ -3,7 +3,7 @@ defmodule WeatherAggregator.Aggregator.Summary do
 
   @spec fetch_summary_data(map) :: map
   def fetch_summary_data(%{}) do
-    locations = ["newyork", "london"]
+    locations = [System.get_env("WA_LOCATION_A"), System.get_env("WA_LOCATION_B")]
 
     res =
       Enum.map(locations, fn location ->

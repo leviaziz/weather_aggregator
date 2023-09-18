@@ -3,7 +3,7 @@ defmodule WeatherAggregator.Aggregator.Detail do
 
   @spec get_each_source_separately(map) :: list
   def get_each_source_separately(%{}) do
-    locations = ["newyork", "london"]
+    locations = [System.get_env("WA_LOCATION_A"), System.get_env("WA_LOCATION_B")]
 
     Enum.map(locations, fn location ->
       one = tomorrow_io_module().get_location_data(location)
