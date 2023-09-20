@@ -2,8 +2,6 @@ defmodule WeatherAggregatorWeb.WeatherControllerTest do
   use ExUnit.Case
 
   alias WeatherAggregatorWeb.WeatherController
-  alias WeatherAggregatorWeb.Helper.DataParserMock
-  alias WeatherAggregator.GenServer
 
   setup do
     {:ok, _pid} = WeatherAggregator.GenServer.start_link(%{})
